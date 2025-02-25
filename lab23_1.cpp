@@ -20,7 +20,14 @@ string toUpperStr(string x){
     return y;
 }
 
-void importDataFromFile(){
+void importDataFromFile(string filename, char names[100], char scores[], char grades[]){
+    ifstream source;
+    source.open(filename);
+    string textline;
+    while(getline(source,textline)){
+        sscanf(textline,%[^]:%f,%f,%f,names,score[i]);
+    }
+    sourcd.close();
 
 }
 
