@@ -43,12 +43,11 @@ void getCommand(string &command, string &key){
     cin >> key;
 }
 
-void searchName(vector<string> &names, vector<int> &scores, vector<char> &grades, string &key){
-    toUpperStr(key);
-    for(int i = 0; i < names.size();i++){
-        if(key == names[i]){
-            cout << names[i] << "'s score = " << scores[i] << endl;
-            cout << names[i] << "'s grade = " << grades[i] << endl;
+void searchName(vector<string> &name2, vector<int> &scores, vector<char> &grades, string &key){
+    for(int i = 0; i < name2.size();i++){
+        if(key.compare(name2[i])){
+            cout << name2[i] << "'s score = " << scores[i] << endl;
+            cout << name2[i] << "'s grade = " << grades[i] << endl;
         }
     }
 }
@@ -64,7 +63,6 @@ int main(){
     vector<int> scores;
     vector<char> grades; 
     importDataFromFile(filename, names, scores, grades);
-    cout << names.size();
     for(unsigned int i = 0; i < names.size(); i++){
      cout << names[i] << "," << scores[i] << "," << grades[i] << "\n";
 }
@@ -75,7 +73,7 @@ int main(){
         command = toUpperStr(command);
         key = toUpperStr(key);
         if(command == "EXIT") break;
-       // else if(command == "GRADE") searchGrade(names, scores, grades, key);
+        else if(command == "GRADE") searchGrade(names, scores, grades, key);
         else if(command == "NAME") searchName(names, scores, grades, key);
         else{
             cout << "---------------------------------\n";
