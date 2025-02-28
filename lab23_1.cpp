@@ -20,23 +20,37 @@ string toUpperStr(string x){
     return y;
 }
 
-void importDataFromFile(string filename, char names[100], char scores[], char grades[]){
+void importDataFromFile(string &filename, vector<string> &names, vector<int> &scores, vector<char> &grades){
     ifstream source;
-    source.open(filename);
+    source.open("name_score.txt");
     string textline;
-    while(getline(source,textline)){
-        sscanf(textline,%[^]:%f,%f,%f,names,score[i]);
+    int s1,s2,s3;
+    char n[100];
+     while (getline(source, textline)) {
+        sscanf(textline.c_str(), "%[^:]:%d %d %d", n, &s1, &s2, &s3);  
+        string n2 = n;
+        names.push_back(n2);  
+        int totalScore = s1 + s2 + s3; 
+        scores.push_back(totalScore);  
+        grades.push_back(score2grade(totalScore));
     }
-    sourcd.close();
-
+    source.close();
 }
 
-void getCommand(){
-
+void getCommand(string &command, string &key){
+    cout << "Please input your command:" << endl;
+    cin >> command;
+    cin >> key;
 }
 
-void searchName(){
-
+void searchName(vector<string> &names, vector<int> &scores, vector<char> &grades, string &key){
+    toUpperStr(key);
+    for(int i = 0; i < names.size();i++){
+        if(key == names[i]){
+            cout << names[i] << "'s score = " << scores[i] << endl;
+            cout << names[i] << "'s grade = " << grades[i] << endl;
+        }
+    }
 }
 
 void searchGrade(){
@@ -50,6 +64,10 @@ int main(){
     vector<int> scores;
     vector<char> grades; 
     importDataFromFile(filename, names, scores, grades);
+    cout << names.size();
+    for(unsigned int i = 0; i < names.size(); i++){
+     cout << names[i] << "," << scores[i] << "," << grades[i] << "\n";
+}
     
     do{
         string command, key;
@@ -57,7 +75,7 @@ int main(){
         command = toUpperStr(command);
         key = toUpperStr(key);
         if(command == "EXIT") break;
-        else if(command == "GRADE") searchGrade(names, scores, grades, key);
+       // else if(command == "GRADE") searchGrade(names, scores, grades, key);
         else if(command == "NAME") searchName(names, scores, grades, key);
         else{
             cout << "---------------------------------\n";
